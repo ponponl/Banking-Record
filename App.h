@@ -1,3 +1,6 @@
+#pragma once
+
 class App {
-    // gọi hàm in menu từ presentation
+public:
+    void run();
 };
