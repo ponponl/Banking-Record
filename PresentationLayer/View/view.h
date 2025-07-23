@@ -1,5 +1,8 @@
 #pragma once
-#include "model.h"
+#include "view.h"
+#include "../../BusinessLayer/BusinessEntity/Account.h"
+
+
 
 void displayMenu();
 int getUserChoice();
