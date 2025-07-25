@@ -2,7 +2,6 @@
 #include <iomanip>
 #include "view.h"
 
-
 using namespace std;
 
 void displayMenu() {
@@ -24,16 +23,13 @@ int getUserChoice() {
 }
 
 void displayAccount(const Account& acc) {
-    cout << left << setw(10) << acc.getAccountNumber()
-         << setw(20) << (acc.getFirstName() + " " + acc.getLastName())
-         << setw(12) << "N/A"  // nếu chưa có field "type"
-         << setw(10) << fixed << setprecision(2) << acc.getBalance()
-         << "\n";
+    cout << left << setw(10) << acc.getAccountNumber() << setw(20) << acc.getName()
+     << setw(12) << acc.getType() << setw(10) << fixed << setprecision(2) << acc.getBalance() << "\n";
+
 }
 
-
 void displayAllAccountsHeader() {
-    cout << left << setw(10) << "accountNumber" << setw(20) << "Name"
+    cout << left << setw(10) << "AccNo" << setw(20) << "Name"
          << setw(12) << "Type" << setw(10) << "Balance\n";
     cout << string(52, '-') << "\n";
 }
