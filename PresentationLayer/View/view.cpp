@@ -35,16 +35,16 @@ void displayAllAccountsHeader() {
 }
 
 void displayNotFound() {
-    cout << "❌ Khong tim thay tai khoan.\n";
+    cout << " Khong tim thay tai khoan.\n";
 }
 
 void displayDeleted(bool success) {
     if (success)
-        cout << "✅ Da xoa tai khoan.\n";
+        cout << " Da xoa tai khoan.\n";
     else
-        cout << "❌ Khong tim thay tai khoan de xoa.\n";
+        cout << " Khong tim thay tai khoan de xoa.\n";
 }
 
 void displayUpdated(float newBalance) {
-    cout << "✅ So du moi: " << newBalance << "\n";
+    cout << " So du moi: " << newBalance << "\n";
 }
