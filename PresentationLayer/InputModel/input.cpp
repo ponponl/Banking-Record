@@ -1,32 +1,34 @@
-#include <iostream>
-#include <string>
 #include "input.h"
-using namespace std;
 
-Account inputAccount() {
-    Account acc;
-    cout << "Nhap so tai khoan: ";
-    cin >> acc.accNo;
-    cout << "Ten khach hang: ";
-    cin.ignore();
-    getline(cin, acc.name);
-    cout << "Loai tai khoan (Saving/Current): ";
-    getline(cin, acc.type);
-    cout << "So tien ban dau: ";
-    cin >> acc.balance;
-    return acc;
+Account::Account() : accNo(0), name(""), type(""), balance(0.0f) {}
+
+Account::Account(int accNo, const std::string& name, const std::string& type, float balance)
+    : accNo(accNo), name(name), type(type), balance(balance) {}
+
+int Account::getAccountNumber() const {
+    return accNo;
 }
 
-int inputAccountNumber() {
-    int no;
-    cout << "Nhap so tai khoan: ";
-    cin >> no;
-    return no;
+std::string Account::getName() const {
+    return name;
 }
 
-float inputBalanceChange() {
-    float delta;
-    cout << "Nhap thay doi (+/-): ";
-    cin >> delta;
-    return delta;
+std::string Account::getType() const {
+    return type;
+}
+
+float Account::getBalance() const {
+    return balance;
+}
+
+void Account::setName(const std::string& name) {
+    this->name = name;
+}
+
+void Account::setType(const std::string& type) {
+    this->type = type;
+}
+
+void Account::setBalance(float balance) {
+    this->balance = balance;
 }
