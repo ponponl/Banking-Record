@@ -23,6 +23,7 @@ public:
     double getBalance() const;
 
     // Setters
+    void setAccountNumber(int id);  
     void setFirstName(const std::string& fName);
     void setLastName(const std::string& lName);
     void setBalance(double bal);
