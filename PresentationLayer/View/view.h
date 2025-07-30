@@ -1,5 +1,8 @@
 #pragma once
+
 #include "../InputModel/input.h"  // Đảm bảo Account được định nghĩa ở đây
+#include "../InputModel/input.h"
+
 
 class DisplayView {
 public:
