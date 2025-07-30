@@ -62,22 +62,44 @@ void displayAccount(const Account& acc) {
          << "| " << setw(11) << acc.getType()
          << "| " << right << setw(9) << fixed << setprecision(2) << acc.getBalance()
          << " |\n";
+=======
+void displayAccount(const Account& acc) {
+    cout << left << setw(10) << acc.getAccountNumber() << setw(20) << acc.getName()
+     << setw(12) << acc.getType() << setw(10) << fixed << setprecision(2) << acc.getBalance() << "\n";
+
+}
+
+void displayAllAccountsHeader() {
+    cout << left << setw(10) << "AccNo" << setw(20) << "Name"
+         << setw(12) << "Type" << setw(10) << "Balance\n";
+    cout << string(52, '-') << "\n";
 }
 
 // Hiển thị thông báo không tìm thấy tài khoản
 void displayNotFound() {
+
     cout << "\nKhong tim thay tai khoan.\n";
+=======
+    cout << " Khong tim thay tai khoan.\n";
+
 }
 
 // Hiển thị thông báo xóa tài khoản
 void displayDeleted(bool success) {
     if (success)
+
         cout << "\nDa xoa tai khoan.\n";
     else
         cout << "\nKhong tim thay tai khoan de xoa.\n";
+=======
+        cout << " Da xoa tai khoan.\n";
+    else
+        cout << " Khong tim thay tai khoan de xoa.\n";
 }
 
 // Hiển thị số dư mới sau khi cập nhật
 void displayUpdated(float newBalance) {
     cout << "\nSo du moi: " << fixed << setprecision(2) << newBalance << "\n";
+=======
+    cout << " So du moi: " << newBalance << "\n";
 }
