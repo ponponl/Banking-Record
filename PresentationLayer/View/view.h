@@ -1,13 +1,17 @@
 #pragma once
-#include "view.h"
-#include "../../BusinessLayer/BusinessEntity/Account.h"
+#include "../InputModel/input.h"  // Đảm bảo Account được định nghĩa ở đây
 
+class DisplayView {
+public:
+    void displayMenu();
+    void displayAccount(const Account& acc);
+    void displayAllAccountsHeader();
+    void displayNotFound();
+    void displayDeleted(bool success);
+    void displayUpdated(float newBalance);
+};
 
-
-void displayMenu();
-int getUserChoice();
-void displayAccount(const Account& acc);
-void displayAllAccountsHeader();
-void displayNotFound();
-void displayDeleted(bool success);
-void displayUpdated(float newBalance);
+class InputView {
+public:
+    int getUserChoice();
+};
