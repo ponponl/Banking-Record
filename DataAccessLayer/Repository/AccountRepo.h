@@ -19,6 +19,8 @@ public:
 
     std::vector<AccountRecord> getAll();
     std::optional<AccountRecord> findById(int id);
+    std::optional<AccountRecord> findByPhone(const std::string& phoneNumber);
+
     void save(const AccountRecord& account);
     void remove(int id);
     void update(const AccountRecord& account);

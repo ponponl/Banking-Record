@@ -34,3 +34,12 @@ bool AccountService::deleteAccount(int id) {
     }
     return false;
 }
+
+std::optional<Account> AccountService::searchAccountByPhone(const std::string& phoneNumber) {
+    auto recordOpt = repo.findByPhone(phoneNumber);
+    if (recordOpt.has_value()) {
+        return AccountRecordParser::toBusinessEntity(recordOpt.value());
+    }
+    return std::nullopt;
+}
+
