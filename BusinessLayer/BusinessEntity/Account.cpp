@@ -24,3 +24,6 @@ void Account::display() const {
     std::cout << "Account #" << accountNumber << ": " << firstName << " " << lastName
               << " | Balance: $" << std::fixed << std::setprecision(2) << balance << "\n";
 }
+void Account::setAccountNumber(int id) {
+    accountNumber = id;
+}
