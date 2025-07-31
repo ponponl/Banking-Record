@@ -34,3 +34,23 @@ bool AccountService::deleteAccount(int id) {
     }
     return false;
 }
+
+bool AccountService::deposit(const std::string& accountId, float amount) {
+    int id = std::stoi(accountId);
+
+    std::optional<AccountRecord> recordOpt = repo.findById(id);
+    if (!recordOpt.has_value()) {
+        return false;  
+    }
+
+    AccountRecord record = recordOpt.value();
+    Account account = AccountRecordParser::toBusinessEntity(record);
+
+    double newBalance = account.getBalance() + amount;
+    account.setBalance(newBalance);
+
+    AccountRecord updatedRecord = AccountRecordParser::toDataEntity(account);
+    repo.update(updatedRecord);
+
+    return true;
+}

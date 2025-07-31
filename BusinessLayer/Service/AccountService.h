@@ -13,4 +13,5 @@ public:
     std::vector<Account> getAllAccounts();
     bool editAccount(const Account& account);
     bool deleteAccount(int id);
+    bool deposit(const string& accountId, float amount);
 };
