@@ -26,6 +26,21 @@ std::optional<AccountRecord> AccountRepository::findById(int id) {
     return std::nullopt;
 }
 
+std::vector<AccountRecord> AccountRepository::searchByName(const std::string& name) {
+    std::vector<AccountRecord> result;
+    auto all = getAll();
+
+    for (const auto& acc : all) {
+        if (acc.getFirstName().find(name) != std::string::npos ||
+            acc.getLastName().find(name) != std::string::npos) {
+            result.push_back(acc);
+        }
+    }
+
+    return result;
+}
+
+
 void AccountRepository::save(const AccountRecord& account) {
     std::vector<AccountRecord> accounts = getAll();
     accounts.push_back(account);

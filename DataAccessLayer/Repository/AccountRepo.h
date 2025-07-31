@@ -19,7 +19,10 @@ public:
 
     std::vector<AccountRecord> getAll();
     std::optional<AccountRecord> findById(int id);
+    std::vector<AccountRecord> searchByName(const std::string& name);
+    
     void save(const AccountRecord& account);
     void remove(int id);
     void update(const AccountRecord& account);
+    
 };

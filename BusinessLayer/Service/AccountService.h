@@ -13,4 +13,5 @@ public:
     std::vector<Account> getAllAccounts();
     bool editAccount(const Account& account);
     bool deleteAccount(int id);
+    std::vector<Account> searchByName(const std::string& name);
 };

@@ -34,3 +34,18 @@ bool AccountService::deleteAccount(int id) {
     }
     return false;
 }
+
+std::vector<AccountRecord> AccountRepository::searchByName(const std::string& name) {
+    std::vector<AccountRecord> result;
+    auto all = getAll();
+
+    for (const auto& acc : all) {
+        if (acc.getFirstName().find(name) != std::string::npos ||
+            acc.getLastName().find(name) != std::string::npos) {
+            result.push_back(acc);
+        }
+    }
+
+    return result;
+}
+
