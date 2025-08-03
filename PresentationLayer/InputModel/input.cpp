@@ -31,4 +31,23 @@ void Account::setType(const std::string& type) {
 
 void Account::setBalance(float balance) {
     this->balance = balance;
+
+void Account::setName(const std::string& name) {
+    this->name = name;
 }
+
+void Account::setType(const std::string& type) {
+    this->type = type;
+}
+
+void Account::setBalance(float balance) {
+    this->balance = balance;
+}
+bool Account::withdraw(float amount) {
+    if (amount > 0 && amount <= balance) {
+        balance -= amount;
+        return true;
+    }
+    return false;
+}
+

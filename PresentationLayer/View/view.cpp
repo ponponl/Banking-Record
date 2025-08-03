@@ -74,8 +74,6 @@ void DisplayView::displayUpdated(float newBalance) {
     cout << "\nSo du moi: " << fixed << setprecision(2) << newBalance << "\n";
 }
 
-// ================= InputView =================
-
 int InputView::getUserChoice() {
     int selected = 0;
     while (true) {
@@ -101,4 +99,15 @@ int InputView::getUserChoice() {
             return selected + 1;
         }
     }
+}
+
+float InputView::getWithdrawAmount() {
+    float amount;
+    cout << "\nNhap so tien muon rut: ";
+    while (!(cin >> amount) || amount <= 0) {
+        cout << "So tien khong hop le. Vui long nhap lai: ";
+        cin.clear();
+        cin.ignore(1000, '\n');
+    }
+    return amount;
 }
