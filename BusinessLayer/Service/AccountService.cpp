@@ -46,6 +46,20 @@ bool AccountService::deleteAccount(int id)
     return false;
 }
 
+std::vector<AccountRecord> AccountRepository::searchByName(const std::string& name) {
+    std::vector<AccountRecord> result;
+    auto all = getAll();
+
+    for (const auto& acc : all) {
+        if (acc.getFirstName().find(name) != std::string::npos ||
+            acc.getLastName().find(name) != std::string::npos) {
+            result.push_back(acc);
+        }
+    }
+
+    return result;
+}
+
 std::optional<Account> AccountService::searchAccountByPhone(const std::string& phoneNumber) {
     auto recordOpt = repo.findByPhone(phoneNumber);
     if (recordOpt.has_value()) {
@@ -54,7 +68,6 @@ std::optional<Account> AccountService::searchAccountByPhone(const std::string& p
     return std::nullopt;
 }
 
-// ✅ Hàm generateNewAccountID trả về int (KHÔNG phải string)
 int AccountService::generateNewAccountID()
 {
     std::vector<Account> accounts = getAllAccounts();
