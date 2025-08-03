@@ -1,15 +1,16 @@
-
 #pragma once
 #include "../../BusinessLayer/BusinessEntity/Account.h"
 #include "../../DataAccessLayer/DAOEntity/AccountRecord.h"
+#include <string>
 
 class AccountRecordParser {
 public:
     static AccountRecord toDataEntity(const Account& account) {
         return AccountRecord(
-            account.getAccountNumber(),
+            std::to_string(account.getAccountNumber()),
             account.getFirstName(),
             account.getLastName(),
+            account.getPhoneNumber(),
             account.getBalance()
         );
     }
@@ -19,9 +20,9 @@ public:
             record.getAccountNumber(),
             record.getFirstName(),
             record.getLastName(),
+            record.getPhoneNumber(),
             record.getBalance()
         );
     }
 };
-
 
