@@ -6,8 +6,8 @@ AccountService::AccountService(const std::string &filePath) : repo(filePath) {}
 
 void AccountService::addAccount(Account &account)
 {
-    int newId = generateNewAccountID(); // Sửa: int, không phải string
-    account.setAccountNumber(newId);    // OK vì accountNumber là int
+    int newId = generateNewAccountID(); 
+    account.setAccountNumber(newId);  
     AccountRecord record = AccountRecordParser::toDataEntity(account);
     repo.save(record);
 }
@@ -46,6 +46,25 @@ bool AccountService::deleteAccount(int id)
     return false;
 }
 
+bool AccountService::deposit(const std::string& accountId, float amount) {
+    int id = std::stoi(accountId);
+
+    std::optional<AccountRecord> recordOpt = repo.findById(id);
+    if (!recordOpt.has_value()) {
+        return false;  
+    }
+
+    AccountRecord record = recordOpt.value();
+    Account account = AccountRecordParser::toBusinessEntity(record);
+
+    double newBalance = account.getBalance() + amount;
+    account.setBalance(newBalance);
+
+    AccountRecord updatedRecord = AccountRecordParser::toDataEntity(account);
+    repo.update(updatedRecord);
+
+    return true;
+
 std::vector<AccountRecord> AccountRepository::searchByName(const std::string& name) {
     std::vector<AccountRecord> result;
     auto all = getAll();
@@ -75,10 +94,10 @@ int AccountService::generateNewAccountID()
 
     for (const auto &acc : accounts)
     {
-        int id = acc.getAccountNumber(); // đã là int
+        int id = acc.getAccountNumber(); 
         if (id > maxId)
             maxId = id;
     }
 
-    return maxId + 1; // VD: nếu lớn nhất là 3 → trả về 4
+    return maxId + 1; 
 }
