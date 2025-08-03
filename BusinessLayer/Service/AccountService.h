@@ -7,12 +7,14 @@
 class AccountService {
 private:
     AccountRepository repo;
+
 public:
     AccountService(const std::string& filePath);
-    void addAccount(const Account& account);
+
+    void addAccount(Account& account);
     std::vector<Account> getAllAccounts();
     bool editAccount(const Account& account);
     bool deleteAccount(int id);
     std::optional<Account> searchAccountByPhone(const std::string& phoneNumber);
-
+    int generateNewAccountID();
 };

@@ -1,4 +1,3 @@
-
 #pragma once
 #include "../../BusinessLayer/BusinessEntity/Account.h"
 #include "../../DataAccessLayer/DAOEntity/AccountRecord.h"
@@ -26,5 +25,4 @@ public:
         );
     }
 };
-
 

@@ -25,6 +25,7 @@ public:
     std::string getPhoneNumber() const;
 
     // Setters
+    void setAccountNumber(int id);  
     void setFirstName(const std::string& fName);
     void setLastName(const std::string& lName);
     void setBalance(float bal);
