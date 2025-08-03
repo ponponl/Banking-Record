@@ -74,8 +74,6 @@ void DisplayView::displayUpdated(float newBalance) {
     cout << "\nSo du moi: " << fixed << setprecision(2) << newBalance << "\n";
 }
 
-// ================= InputView =================
-
 int InputView::getUserChoice() {
     int selected = 0;
     while (true) {

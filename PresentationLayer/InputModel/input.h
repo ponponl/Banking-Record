@@ -24,7 +24,5 @@ public:
     void setName(const std::string& name);
     void setType(const std::string& type);
     void setBalance(float balance);
-    //rut tien
     bool withdraw(float amount);
-
 };

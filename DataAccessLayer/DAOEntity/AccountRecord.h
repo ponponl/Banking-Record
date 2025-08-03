@@ -7,18 +7,22 @@ private:
     string accountNumber;
     string firstName;
     string lastName;
-    string balance;
+    std::string phoneNumber;
+    float balance;
 public:
-    AccountRecord(int accNo, const std::string& fName, const std::string& lName, double bal);
+    AccountRecord(const string& accNo, const string& fName, const string& lName,
+                  const string& phone, float bal);
 
     AccountRecord();
 
     int getAccountNumber() const;
     std::string getFirstName() const;
     std::string getLastName() const;
-    double getBalance() const;
+    std::string getPhoneNumber() const;
+    float getBalance() const;
 
     void setFirstName(const std::string& fName);
     void setLastName(const std::string& lName);
-    void setBalance(double bal);
+    void setPhoneNumber(const std::string& phone);
+    void setBalance(float bal);
 };

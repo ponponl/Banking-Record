@@ -26,6 +26,41 @@ std::optional<AccountRecord> AccountRepository::findById(int id) {
     return std::nullopt;
 }
 
+std::vector<AccountRecord> AccountRepository::searchByName(const std::string& name) {
+    std::vector<AccountRecord> result;
+    auto all = getAll();
+
+    for (const auto& acc : all) {
+        if (acc.getFirstName().find(name) != std::string::npos ||
+            acc.getLastName().find(name) != std::string::npos) {
+            result.push_back(acc);
+        }
+    }
+
+    return result;
+}
+
+std::optional<AccountRecord> AccountRepository::findByPhone(const std::string& phoneNumber) {
+    auto all = getAll();
+    for (const auto& acc : all) {
+        if (acc.getPhoneNumber() == phoneNumber) {
+            return acc;
+        }
+    }
+    return std::nullopt;
+}
+
+std::optional<AccountRecord> AccountRepository::findByPhone(const std::string& phoneNumber) {
+    auto all = getAll();
+    for (const auto& acc : all) {
+        if (acc.getPhoneNumber() == phoneNumber) {
+            return acc;
+        }
+    }
+    return std::nullopt;
+}
+
+
 void AccountRepository::save(const AccountRecord& account) {
     std::vector<AccountRecord> accounts = getAll();
     accounts.push_back(account);
