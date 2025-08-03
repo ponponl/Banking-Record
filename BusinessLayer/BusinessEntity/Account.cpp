@@ -3,8 +3,8 @@
 #include <iomanip>
 
 // Constructors
-Account::Account(int accNo, const std::string& fName, const std::string& lName, double bal)
-    : accountNumber(accNo), firstName(fName), lastName(lName), balance(bal) {}
+Account::Account(int accNo, const std::string& fName, const std::string& lName, const std::string& phone, float bal)
+    : accountNumber(accNo), firstName(fName), lastName(lName), phoneNumber(phone), balance(bal) {}
 
 Account::Account() : accountNumber(0), firstName(""), lastName(""), balance(0.0) {}
 
@@ -12,12 +12,20 @@ Account::Account() : accountNumber(0), firstName(""), lastName(""), balance(0.0)
 int Account::getAccountNumber() const { return accountNumber; }
 std::string Account::getFirstName() const { return firstName; }
 std::string Account::getLastName() const { return lastName; }
-double Account::getBalance() const { return balance; }
+float Account::getBalance() const { return balance; }
+
+std::string Account::getPhoneNumber() const {
+    return phoneNumber;
+}
 
 // Setters
 void Account::setFirstName(const std::string& fName) { firstName = fName; }
 void Account::setLastName(const std::string& lName) { lastName = lName; }
-void Account::setBalance(double bal) { balance = bal; }
+void Account::setBalance(float bal) { balance = bal; }
+
+void Account::setPhoneNumber(const std::string& phone) {
+    phoneNumber = phone;
+}
 
 // Display
 void Account::display() const {

@@ -15,7 +15,6 @@ public:
     std::vector<Account> getAllAccounts();
     bool editAccount(const Account& account);
     bool deleteAccount(int id);
-
-    // ✅ sửa trả về int
+    std::optional<Account> searchAccountByPhone(const std::string& phoneNumber);
     int generateNewAccountID();
 };
