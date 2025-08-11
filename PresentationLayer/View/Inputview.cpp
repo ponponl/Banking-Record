@@ -1,6 +1,5 @@
 #include <iostream>
 #include <iomanip>
-#include "view.h"
 #include <conio.h>
 #include <windows.h>
 

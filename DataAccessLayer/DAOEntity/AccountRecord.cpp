@@ -1,44 +1,38 @@
 #include "AccountRecord.h"
-#include <sstream>
 
-AccountRecord::AccountRecord(const string& accNo, const string& fName, const string& lName,
-                             const string& phone, float bal)
-    : accountNumber(accNo), firstName(fName), lastName(lName), phoneNumber(phone), balance(bal) {}
+AccountRecord::AccountRecord() : _id(""), _name(""), _phoneNumber(""), _balance("") {}
 
-AccountRecord::AccountRecord() : accountNumber("0"), firstName(""), lastName(""), balance(0) {}
+AccountRecord::AccountRecord(const string& id, const string& name, const string& phone, const string& balance)
+    : _id(id), _name(name), _phoneNumber(phone), _balance(balance) {}
 
-int AccountRecord::getAccountNumber() const {
-    return std::stoi(accountNumber);
+string AccountRecord::getId() const {
+    return _id;
 }
 
-std::string AccountRecord::getFirstName() const {
-    return firstName;
+string AccountRecord::getName() const {
+    return _name;
 }
 
-std::string AccountRecord::getLastName() const {
-    return lastName;
+string AccountRecord::getPhoneNumber() const {
+    return _phoneNumber;
 }
 
-float AccountRecord::getBalance() const {
-    return balance;
+string AccountRecord::getBalance() const {
+    return _balance;
 }
 
-std::string AccountRecord::getPhoneNumber() const {
-    return phoneNumber;
+void AccountRecord::setID(const string& id) {
+    _id = id;
 }
 
-void AccountRecord::setFirstName(const std::string& fName) {
-    firstName = fName;
+void AccountRecord::setName(const string& name) {
+    _name = name;
 }
 
-void AccountRecord::setLastName(const std::string& lName) {
-    lastName = lName;
+void AccountRecord::setPhoneNumber(const string& phone) {
+    _phoneNumber = phone;
 }
 
-void AccountRecord::setPhoneNumber(const std::string& phone) {
-    phoneNumber = phone;
-}
-
-void AccountRecord::setBalance(float bal) {
-    balance = bal;
+void AccountRecord::setBalance(const string& balance) {
+    _balance = balance;
 }
