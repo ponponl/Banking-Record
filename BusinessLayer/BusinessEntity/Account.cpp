@@ -1,37 +1,37 @@
 #include "Account.h"
-#include <sstream>
-#include <iomanip>
 
-// Constructors
-Account::Account(int accNo, const std::string& fName, const std::string& lName, const std::string& phone, float bal)
-    : accountNumber(accNo), firstName(fName), lastName(lName), phoneNumber(phone), balance(bal) {}
+Account::Account() : _id(0), _name(""), _phoneNumber(""), _balance(0) {}
 
-Account::Account() : accountNumber(0), firstName(""), lastName(""), balance(0.0) {}
+Account::Account(int id, const string& name, const string& phone, long long bal)
+    : _id(id), _name(name), _phoneNumber(phone), _balance(bal) {}
 
-// Getters
-int Account::getAccountNumber() const { return accountNumber; }
-std::string Account::getFirstName() const { return firstName; }
-std::string Account::getLastName() const { return lastName; }
-float Account::getBalance() const { return balance; }
-
-std::string Account::getPhoneNumber() const {
-    return phoneNumber;
+int Account::getID() const { 
+    return _id; 
 }
 
-// Setters
-void Account::setFirstName(const std::string& fName) { firstName = fName; }
-void Account::setLastName(const std::string& lName) { lastName = lName; }
-void Account::setBalance(float bal) { balance = bal; }
-
-void Account::setPhoneNumber(const std::string& phone) {
-    phoneNumber = phone;
+string Account::getName() const {
+    return _name;
+}
+long long Account::getBalance() const { 
+    return _balance; 
 }
 
-// Display
-void Account::display() const {
-    std::cout << "Account #" << accountNumber << ": " << firstName << " " << lastName
-              << " | Balance: $" << std::fixed << std::setprecision(2) << balance << "\n";
+string Account::getPhoneNumber() const {
+    return _phoneNumber;
 }
-void Account::setAccountNumber(int id) {
-    accountNumber = id;
+
+void Account::setName(const string& name) { 
+    _name = name; 
+}
+
+void Account::setBalance(long long bal) { 
+    _balance = bal; 
+}
+
+void Account::setPhoneNumber(const string& phone) {
+    _phoneNumber = phone;
+}
+
+void Account::setID(int id) {
+    _id = id;
 }

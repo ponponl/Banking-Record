@@ -1,28 +1,27 @@
-#include <string>
-#include <vector>
-#include <optional>
-#include "../File/AccountParser.h"
-#include "../DAOEntity/AccountRecord.h"
-#include "../../BusinessLayer/BusinessEntity/Account.h"
-#include "../File/FileReader.h"
-#include "../File/FileWriter.h"
-#include <vector>
-#include <optional>
-using std::vector, std::string;
+#ifndef ACCOUNT_REPO
+#define ACCOUNT_REPO
 
-class AccountRepository {
-private:
-    std::string filePath;
+#include <IAccountRepo.h>
+#include <FileReader.h>
+#include <FileWriter.h>
+#include <AccountParser.h>
 
-public:
-    explicit AccountRepository(const std::string& filePath);
+using std::nullopt;
 
-    std::vector<AccountRecord> getAll();
-    std::optional<AccountRecord> findById(int id);
-    std::vector<AccountRecord> searchByName(const std::string& name);
-    std::optional<AccountRecord> findByPhone(const std::string& phoneNumber);
-    void save(const AccountRecord& account);
-    void remove(int id);
-    void update(const AccountRecord& account);
-    
+class AccountRepository : public IAccountRepository {
+    private:
+        string _filePath;
+    public:
+        AccountRepository(const string& filePath);
+    public:
+        bool addAccount(const AccountRecord& account) override;
+        void removeAccount(const string& id) override;
+        bool updateAccount(const AccountRecord& account) override;
+    public:
+        vector<AccountRecord> getAll() const override; 
+        optional<AccountRecord> findById(const string& id) const override;
+        vector<AccountRecord> findByName(const string& name) const override;
+        optional<AccountRecord> findByPhone(const string& phoneNumber) const override;
 };
+
+#endif

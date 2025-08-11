@@ -1,38 +1,37 @@
 #include "AccountRepo.h"
 
-AccountRepository::AccountRepository(const std::string& filePath)
-    : filePath(filePath) {}
+AccountRepository::AccountRepository(const string& filePath)
+    : _filePath(filePath) {}
 
-std::vector<AccountRecord> AccountRepository::getAll() {
-    FileReader reader(filePath);
+vector<AccountRecord> AccountRepository::getAll() const {
+    FileReader reader(_filePath);
     std::vector<std::string> lines = reader.getAllLines();
     std::vector<AccountRecord> result;
 
     for (const auto& line : lines) {
         if (line.empty()) continue;
-        AccountRecord record = Parser::parseAccount(line);
+        AccountRecord record = AccountParser::parseAccount(line);
         result.push_back(record);
     }
     return result;
 }
 
-std::optional<AccountRecord> AccountRepository::findById(int id) {
+std::optional<AccountRecord> AccountRepository::findById(const string& id) const {
     auto accounts = getAll();
     for (const auto& acc : accounts) {
-        if (acc.getAccountNumber() == id) {
+        if (acc.getId() == id) {
             return acc;
         }
     }
     return std::nullopt;
 }
 
-std::vector<AccountRecord> AccountRepository::searchByName(const std::string& name) {
+std::vector<AccountRecord> AccountRepository::findByName(const std::string& name) const {
     std::vector<AccountRecord> result;
     auto all = getAll();
 
     for (const auto& acc : all) {
-        if (acc.getFirstName().find(name) != std::string::npos ||
-            acc.getLastName().find(name) != std::string::npos) {
+        if (acc.getName().find(name) != std::string::npos) {
             result.push_back(acc);
         }
     }
@@ -40,7 +39,7 @@ std::vector<AccountRecord> AccountRepository::searchByName(const std::string& na
     return result;
 }
 
-std::optional<AccountRecord> AccountRepository::findByPhone(const std::string& phoneNumber) {
+std::optional<AccountRecord> AccountRepository::findByPhone(const std::string& phoneNumber) const {
     auto all = getAll();
     for (const auto& acc : all) {
         if (acc.getPhoneNumber() == phoneNumber) {
@@ -50,52 +49,42 @@ std::optional<AccountRecord> AccountRepository::findByPhone(const std::string& p
     return std::nullopt;
 }
 
-std::optional<AccountRecord> AccountRepository::findByPhone(const std::string& phoneNumber) {
-    auto all = getAll();
-    for (const auto& acc : all) {
-        if (acc.getPhoneNumber() == phoneNumber) {
-            return acc;
-        }
-    }
-    return std::nullopt;
+bool AccountRepository::addAccount(const AccountRecord& account) {
+    FileWriter writer = FileWriter(_filePath);
+    auto line = AccountParser::serializeAccount(account);
+    writer.writeLine(line);
 }
 
-
-void AccountRepository::save(const AccountRecord& account) {
+void AccountRepository::removeAccount(const string& id) {
     std::vector<AccountRecord> accounts = getAll();
-    accounts.push_back(account);
-
+    FileWriter writer = FileWriter(_filePath);
     std::vector<std::string> lines;
-    for (const auto& acc : accounts) {
-        lines.push_back(Parser::serializeAccount(acc));
-    }
-
-    FileWriter::writeLines(filePath, lines);
-}
-
-void AccountRepository::remove(int id) {
-    std::vector<AccountRecord> accounts = getAll();
-    std::vector<std::string> lines;
+    bool hasAccount = false;
 
     for (const auto& acc : accounts) {
-        if (acc.getAccountNumber() != id) {
-            lines.push_back(Parser::serializeAccount(acc));
+        if (acc.getId() != id) {
+            hasAccount = true;
+            lines.push_back(AccountParser::serializeAccount(acc));
         }
     }
-
-    FileWriter::writeLines(filePath, lines);
+    if (hasAccount) { writer.writeLines(lines); }
 }
 
-void AccountRepository::update(const AccountRecord& account) {
+bool AccountRepository::updateAccount(const AccountRecord& account) {
     std::vector<AccountRecord> accounts = getAll();
+    FileWriter writer = FileWriter(_filePath);
     std::vector<std::string> lines;
+    bool hasAccount = false;
 
     for (auto& acc : accounts) {
-        if (acc.getAccountNumber() == account.getAccountNumber()) {
+        if (acc.getId() == account.getId()) {
             acc = account;
+            hasAccount = true;
         }
-        lines.push_back(Parser::serializeAccount(acc));
+        lines.push_back(AccountParser::serializeAccount(acc));
     }
 
-    FileWriter::writeLines(filePath, lines);
+    if (hasAccount) { writer.writeLines(lines); }
+    return hasAccount;
 }
+

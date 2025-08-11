@@ -1,9 +1,9 @@
 #include "FileReader.h"
 
 FileReader::FileReader(string input){
-    _reader.open(input, std::ios::in);
+    _reader.open(input, ios::in);
     if (_reader.fail()){
-        throw std::runtime_error("Cannot open file");
+        throw runtime_error("Cannot open file");
     }
 }
 

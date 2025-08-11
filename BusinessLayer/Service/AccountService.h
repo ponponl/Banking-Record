@@ -1,22 +1,29 @@
-#pragma once
+#ifndef SERVICE
+#define SERVICE
+
 #include "../BusinessEntity/Account.h"
 #include "../../DataAccessLayer/Repository/AccountRepo.h"
-#include <vector>
 #include "../Parser/AccountRecordParser.h"
+#include <vector>
+#include <optional>
+#include <string>
+using std::vector, std::string, std::to_string, std::optional, std::nullopt, std::shared_ptr;
 
 class AccountService {
-private:
-    AccountRepository repo;
+    private:
+        shared_ptr<IAccountRepository> _repo;
+    public:
+        AccountService(shared_ptr<IAccountRepository> repo);
 
-public:
-    AccountService(const std::string& filePath);
+    public:
+        vector<Account> getAllAccounts();
+        void addAccount(Account& account);
+        bool editAccount(const Account& account);
+        bool deleteAccount(int id);
 
-    void addAccount(Account& account);
-    std::vector<Account> getAllAccounts();
-    bool editAccount(const Account& account);
-    bool deleteAccount(int id);
-    bool deposit(const string& accountId, float amount);
-    std::vector<Account> searchByName(const std::string& name);
-    std::optional<Account> searchAccountByPhone(const std::string& phoneNumber);
-    int generateNewAccountID();
+    public:
+        vector<Account> searchByName(const string& name);
+        optional<Account> searchByPhone(const string& phoneNumber);
 };
+
+#endif
