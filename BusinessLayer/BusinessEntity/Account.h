@@ -1,11 +1,10 @@
-#define ACCOUNT
-#ifdef ACCOUNT
+#ifndef ACCOUNT_H
+#define ACCOUNT_H
 #include <string>
 #include <iostream>
 using std::string;
-
 class Account {
-    private:
+    protected:
         int _id;
         string _name;
         string _phoneNumber;
@@ -14,15 +13,17 @@ class Account {
         Account();
         Account(int id, const string& name, const string& phone, long long bal);
     public:
-        int getID() const;
-        string getName() const;
-        long long getBalance() const;
-        string getPhoneNumber() const;
+        virtual int getID() const;
+        virtual string getName() const;
+        virtual long long getBalance() const;
+        virtual string getPhoneNumber() const;
     public:
         void setID(int id);  
         void setName(const string& name);
         void setBalance(long long bal);
         void setPhoneNumber(const string& phone);
+    public:
+        virtual long long getLimit() const = 0;
 };
 
 #endif
