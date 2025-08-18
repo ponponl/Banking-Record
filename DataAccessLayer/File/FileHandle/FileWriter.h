@@ -11,11 +11,11 @@ class FileWriter {
     private:
         ofstream _writer;
     public:
-        FileWriter(const string& filePath);
+        FileWriter(const string& filePath, bool append = true);
         ~FileWriter();
     public:
-        void writeLine(const string& line);
-        void writeLines(const vector<string>& lines);
+    void writeLine(const string& line);
+    static void writeLines(const vector<string>& lines, const string& filePath);
 };
 
 #endif

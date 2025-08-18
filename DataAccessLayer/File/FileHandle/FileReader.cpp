@@ -13,11 +13,10 @@ FileReader::~FileReader(){
 
 vector<string> FileReader::getAllLines(){
     vector<string> lines;
-    while (!_reader.eof()){
-        string line;
-        getline(_reader, line);
-        lines.push_back(line);
+    string line;
+    while (getline(_reader, line)) {
+        if (!line.empty())
+            lines.push_back(line);
     }
-    
     return lines;
 }
