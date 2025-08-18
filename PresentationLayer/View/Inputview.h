@@ -1,7 +1,15 @@
-#pragma once
+#include <iostream>
+#include <iomanip>
+#include <conio.h>
+#include <windows.h>
+#include <string>
+#include "AccountModel.h"
+#include "MenuView.h"
+
+using namespace std;
 
 class InputView {
 public:
-    int getUserChoice();
-    float getWithdrawAmount();
+    int getUserChoice(MenuView& menu);
+    int getSearchChoice(MenuView& menu);
 };

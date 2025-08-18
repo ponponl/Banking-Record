@@ -1,53 +1,44 @@
-#include "input.h"
+#include "AccountModel.h"
+#include <iostream>
 
-Account::Account() : accNo(0), name(""), type(""), balance(0.0f) {}
+//test
+AccountModel::AccountModel() : _id(0), _balance(0), _name(""), _phoneNumber(""), _type(AccountType::regular) {}
 
-Account::Account(int accNo, const std::string& name, const std::string& type, float balance)
-    : accNo(accNo), name(name), type(type), balance(balance) {}
+AccountModel::AccountModel(int id, const string& name, const string& phone, long long balance, AccountType type)
+    : _id(id), _name(name), _phoneNumber(phone), _balance(balance), _type(type) {}
 
-int Account::getAccountNumber() const {
-    return accNo;
+int AccountModel::getID() const {
+    return _id;
 }
 
-std::string Account::getName() const {
-    return name;
+string AccountModel::getName() const {
+    return _name;
 }
 
-std::string Account::getType() const {
-    return type;
+string AccountModel::getPhoneNumber() const {
+    return _phoneNumber;
 }
 
-float Account::getBalance() const {
-    return balance;
+long long AccountModel::getBalance() const {
+    return _balance;
 }
 
-void Account::setName(const std::string& name) {
-    this->name = name;
+void AccountModel::setName(const string& name) {
+    _name = name;
 }
 
-void Account::setType(const std::string& type) {
-    this->type = type;
+void AccountModel::setPhoneNumber(const string& phone) {
+    _phoneNumber = phone;
 }
 
-void Account::setBalance(float balance) {
-    this->balance = balance;
-
-void Account::setName(const std::string& name) {
-    this->name = name;
+void AccountModel::setBalance(long long balance) {
+    _balance = balance;
 }
 
-void Account::setType(const std::string& type) {
-    this->type = type;
+AccountType AccountModel::getType() const {
+    return _type;
 }
 
-void Account::setBalance(float balance) {
-    this->balance = balance;
+void AccountModel::setType(AccountType type) {
+    _type = type;
 }
-bool Account::withdraw(float amount) {
-    if (amount > 0 && amount <= balance) {
-        balance -= amount;
-        return true;
-    }
-    return false;
-}
-

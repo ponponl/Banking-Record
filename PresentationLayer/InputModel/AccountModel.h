@@ -1,28 +1,36 @@
-#pragma once
+#ifndef ACCOUNTMODEL_H
+#define ACCOUNTMODEL_H
+
 #include <string>
+#include <iostream>
+using std::string, std::cin, std::cout, std::getline;
 
-class Account {
-private:
-    int accNo;
-    std::string name;
-    std::string type;
-    float balance;
-public:
-    // Constructor mặc định
-    Account();
-
-    // Constructor đầy đủ
-    Account(int accNo, const std::string& name, const std::string& type, float balance);
-
-    // Getter
-    int getAccountNumber() const;
-    std::string getName() const;
-    std::string getType() const;
-    float getBalance() const;
-
-    // Setter
-    void setName(const std::string& name);
-    void setType(const std::string& type);
-    void setBalance(float balance);
-    bool withdraw(float amount);
+enum class AccountType {
+    regular,
+    vip
 };
+
+class AccountModel {
+    private:
+        int _id;  
+        string _name;
+        string _phoneNumber;
+        AccountType _type;
+        long long _balance;
+    public:
+        AccountModel();
+        AccountModel(int id, const string& name, const string& phone, long long balance, AccountType type);
+    public:
+        int getID() const;
+        string getName() const;
+        string getPhoneNumber() const;
+        AccountType getType() const;
+        long long getBalance() const;
+    public:
+    void setName(const string& name);
+    void setPhoneNumber(const string& phone);
+    void setBalance(long long balance);
+    void setType(AccountType type);
+};
+
+#endif 
