@@ -50,14 +50,14 @@ std::optional<AccountRecord> AccountRepository::findByPhone(const std::string& p
 }
 
 bool AccountRepository::addAccount(const AccountRecord& account) {
-    FileWriter writer = FileWriter(_filePath);
+    FileWriter writer(_filePath, true); 
     auto line = AccountParser::serializeAccount(account);
     writer.writeLine(line);
+    return true;
 }
 
 void AccountRepository::removeAccount(const string& id) {
     std::vector<AccountRecord> accounts = getAll();
-    FileWriter writer = FileWriter(_filePath);
     std::vector<std::string> lines;
     bool hasAccount = false;
 
@@ -67,12 +67,13 @@ void AccountRepository::removeAccount(const string& id) {
             lines.push_back(AccountParser::serializeAccount(acc));
         }
     }
-    if (hasAccount) { writer.writeLines(lines); }
+    if (hasAccount) {
+        FileWriter::writeLines(lines, _filePath);
+    }
 }
 
 bool AccountRepository::updateAccount(const AccountRecord& account) {
     std::vector<AccountRecord> accounts = getAll();
-    FileWriter writer = FileWriter(_filePath);
     std::vector<std::string> lines;
     bool hasAccount = false;
 
@@ -84,7 +85,9 @@ bool AccountRepository::updateAccount(const AccountRecord& account) {
         lines.push_back(AccountParser::serializeAccount(acc));
     }
 
-    if (hasAccount) { writer.writeLines(lines); }
+    if (hasAccount) {
+        FileWriter::writeLines(lines, _filePath);
+    }
     return hasAccount;
 }
 
