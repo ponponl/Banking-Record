@@ -1,6 +1,8 @@
 #ifndef ACCOUNTVIEW_H
 #define ACCOUNTVIEW_H
 
+#include "../Validation/AccountInputValidation.h"
+
 #include "AccountModel.h"
 #include <iostream>
 #include <string>
