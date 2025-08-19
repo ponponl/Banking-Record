@@ -1,3 +1,7 @@
+
+#ifndef INPUTVIEW_H
+#define INPUTVIEW_H
+
 #include <iostream>
 #include <iomanip>
 #include <conio.h>
@@ -13,3 +17,5 @@ public:
     int getUserChoice(MenuView& menu);
     int getSearchChoice(MenuView& menu);
 };
+
+#endif
