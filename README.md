@@ -1,97 +1,97 @@
 # Banking-Record
 
-##  Folder Structure & Usage
+## Project Overview
 
-Mô tả các thư mục và file:
+Banking-Record is a C++23 console application simulating a banking system with support for regular, VIP, and card accounts. It demonstrates a classic 3-layer architecture (Presentation, Business, Data) and applies the MVC (Model-View-Controller) pattern in the Presentation layer. 
+
+### Features
+- Create, view, and manage accounts (Regular, VIP, Card)
+- Card account support with adapter pattern
+- Unique phone validation with error messaging
+- File-based persistence (data.txt, card.txt, transaction.txt)
+- Layered architecture: Presentation, Business, Data, Mapping, Utils
+- Modern C++: smart pointers, std::expected, enum class, RAII
+- Testable design with controller and service separation
+
+## Folder Structure
 
 ```
-presentation/          // Giao diện & nhận input
-  view/                // In menu, nhận input, gọi service (AccountView.h/.cpp)
-  input_model/         // Dữ liệu người dùng nhập (AccountInputModel.h)
-
-business/              // Xử lý logic nghiệp vụ
-  entity/              // Class Account (có method) (Account.h/.cpp)
-  service/             // Gọi từ view để xử lý logic (AccountService.h/.cpp)
-
-data/                  // Lưu/đọc từ file
-  entity/              // Model để ghi file (pure data) (AccountDataModel.h)
-  repository/          // Đọc/ghi file (AccountRepository.h/.cpp)
-  storage/             // Thư mục chứa file .txt (accounts.txt)
-
-utils/                 // Hàm tiện ích dùng chung (DateUtils.h/.cpp, Validation.h/.cpp)
-
-main.cpp               // Chạy menu chính
-README.md              // Mô tả
+PresentationLayer/
+   View/           // UI: MenuView, InputView, AccountView
+   InputModel/     // User input model: AccountModel
+   Controller/     // AccountController
+   Validation/     // Input validation logic
+BusinessLayer/
+   BusinessEntity/ // Account, RegularAccount, VipAccount, CardAccount
+   Service/        // AccountService, CardAccountAdapter
+   AccountFactory/ // AccountFactory (creation/serialization)
+DataAccessLayer/
+   DAOEntity/      // AccountRecord (pure data for file)
+   Repository/     // AccountRepo, IAccountRepo
+   File/
+      FileHandle/   // FileReader, FileWriter
+      Parser/       // AccountParser, TransactionParser
+      Data/         // card.txt, data.txt, transaction.txt
+Mapping/
+   AccountModelParser, AccountRecordParser
+Utils/
+   BalanceFormatter, GetTime
+main.cpp, App.cpp // Main entry and app logic
+README.md         // Documentation
 ```
 
-##  Hướng dẫn sử dụng Feature Branch Workflow (GitHub)
+## Key Techniques & Patterns
 
-1. **Clone repository:**
-   ```sh
-   git clone <repo-url>
-   cd Banking-Record
-   ```
-2. **Tạo branch mới cho từng tính năng:**
-   ```sh
-   git checkout -b name/feature/<ten-tinh-nang>
-   ```
-3. **Làm việc, chỉnh sửa code trên branch này.**
+- **Layered Architecture:** Clear separation of UI, business logic, data access, and utility layers.
+- **Adapter Pattern:** `CardAccountAdapter` allows card accounts to be handled via the unified `Account` interface.
+- **Factory Pattern:** `AccountFactory` creates and serializes all account types.
+- **Smart Pointers:** Uses `std::unique_ptr` for memory safety and ownership.
+- **Modern C++ Features:**
+   - `enum class` for type safety
+   - `std::expected` for error handling in validation
+- **Validation:**
+   - Unique phone number check via service layer
+   - Name and balance format validation
+   - Error reporting with specific messages
+- **File Persistence:**
+   - Data stored in text files, parsed and serialized via dedicated classes
+- **Testable Design:**
+   - Controller and service separation for easy testing and extension
 
-4. **Add & commit thay đổi:**
-   ```sh
-   git add .
-   git commit -m "Add <ten-tinh-nang>"
-   ```
-5. **Push branch lên GitHub:**
-   ```sh
-   git push origin name/feature/<ten-tinh-nang>
-   ```
-6. **Tạo Pull Request** trên GitHub để merge vào `main`.
+## Build & Run
 
-7. **Sau khi được review và duyệt, merge Pull Request.**
-
-8. **Cập nhật branch main local:**
-   ```sh
-   git checkout main
-   git pull origin main
-   ```
-
-**Lưu ý:** Luôn tạo branch mới cho mỗi tính năng/bugfix. Không commit trực tiếp lên `main`.
----
-
-### Quy tắc đặt tên branch
-
-- Đặt tên branch theo dạng: `name/feature/<ten-tinh-nang>`, `name/fix/<ten-bug>`, ...
-- Trong đó `name` là tên thành viên (hoặc username), giúp dễ quản lý khi làm việc nhóm.
-- Tên branch viết bằng tiếng Anh, ngắn gọn, phân tách bằng dấu gạch ngang (-).
-
-**Ví dụ:**
-```
-nam/feature/add-login
-linh/fix/validate-email
-hoang/update/account-service
-```
-
-## Quy tắc commit message
-
----
-
-Tuân theo chuẩn commit rõ ràng với các prefix sau:
-
-| Prefix    | Ý nghĩa                                              |
-|-----------|------------------------------------------------------|
-| ADD:      | Thêm mới file, tính năng                             |
-| UPDATE:   | Cập nhật logic, dữ liệu hoặc cấu trúc                 |
-| FIX:      | Sửa lỗi                                              |
-| REMOVE:   | Xoá file hoặc đoạn code không cần thiết               |
-| STYLE:    | Format code, chỉnh sửa style không ảnh hưởng logic   |
-| REFACTOR: | Cải tiến cấu trúc code, không thay đổi hành vi       |
-| DOC:      | Cập nhật tài liệu, comment                           |
-
-**Ví dụ:**
+Compile with:
 
 ```sh
-git commit -m "ADD: user model and registration controller"
-git commit -m "STYLE: format server.js with Prettier"
+g++ -std=c++23 -I PresentationLayer/View -I PresentationLayer/InputModel -I BusinessLayer/BusinessEntity -I BusinessLayer/Service -I DataAccessLayer/DAOEntity -I DataAccessLayer/Repository -I DataAccessLayer/File/FileHandle -I DataAccessLayer/File/FileParser -I Mapping -I Utils -I PresentationLayer/Validation -o BankingApp main.cpp App.cpp PresentationLayer/View/MenuView.cpp PresentationLayer/View/InputView.cpp PresentationLayer/View/AccountView.cpp PresentationLayer/InputModel/AccountModel.cpp PresentationLayer/Controller/AccountController.cpp BusinessLayer/BusinessEntity/Account.cpp BusinessLayer/BusinessEntity/RegularAccount.cpp BusinessLayer/BusinessEntity/VipAccount.cpp BusinessLayer/BusinessEntity/CardAccount.cpp BusinessLayer/Service/AccountService.cpp BusinessLayer/Service/CardAccountAdapter.cpp BusinessLayer/AccountFactory.cpp DataAccessLayer/DAOEntity/AccountRecord.cpp DataAccessLayer/Repository/AccountRepo.cpp DataAccessLayer/File/FileHandle/FileReader.cpp DataAccessLayer/File/FileHandle/FileWriter.cpp DataAccessLayer/File/Parser/AccountParser.cpp Utils/BalanceFormatter.cpp PresentationLayer/Validation/AccountInputValidation.cpp
 ```
+
+Run with:
+
+```
+./BankingApp
+```
+## Usage
+
+Run the app and follow the menu prompts to create, view, and manage accounts. Card accounts require card number, holder name, expiration date, CVV, and initial balance.
+
+## Contribution & Workflow
+
+- Use feature branches for each new feature or bugfix
+- Follow clear commit message conventions (ADD, UPDATE, FIX, etc.)
+- See below for branch and commit guidelines
+
+### Branch Naming
+`name/feature/<feature>`, `name/fix/<bug>`, ...
+
+### Commit Message Prefixes
+| Prefix    | Meaning                       |
+|-----------|-------------------------------|
+| ADD:      | Add new file/feature          |
+| UPDATE:   | Update logic/data/structure   |
+| FIX:      | Fix bug                      |
+| REMOVE:   | Remove file/code              |
+| STYLE:    | Code formatting/style         |
+| REFACTOR: | Refactor code structure       |
+| DOC:      | Update docs/comments          |
 
