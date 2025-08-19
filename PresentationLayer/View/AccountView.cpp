@@ -1,7 +1,5 @@
 #include "AccountView.h"
 
-#include "../Validation/AccountInputValidation.h"
-
 bool AccountView::inputUpdateInfo(int& id, string& newName, string& newPhone, long long& newBal, bool& updateName, bool& updatePhone, bool& updateBalance) {
         cout << "Nhap ID tai khoan can cap nhat: ";
         if (!(cin >> id)) {
@@ -35,8 +33,9 @@ bool AccountView::inputUpdateInfo(int& id, string& newName, string& newPhone, lo
             while (true) {
                 cout << "Nhap so dien thoai moi: ";
                 getline(cin, newPhone);
-                if (!AccountInputValidation::isValidPhone(newPhone)) {
-                    cout << "So dien thoai phai la 8 chu so. Vui long nhap lai!\n";
+                auto result = AccountInputValidation::validatePhone(newPhone);
+                if (!result) {
+                    cout << result.error() << " Vui long nhap lai!\n";
                     continue;
                 }
                 updatePhone = true;
@@ -81,8 +80,9 @@ void AccountView::inputCreate(AccountModel& account) {
     while (true) {
         cout << "Enter phone: ";
         getline(cin, phone);
-        if (!AccountInputValidation::isValidPhone(phone)) {
-            cout << "So dien thoai phai la 8 chu so. Vui long nhap lai!\n";
+        auto result = AccountInputValidation::validatePhone(phone);
+        if (!result) {
+            cout << result.error() << " Vui long nhap lai!\n";
             continue;
         }
         break;
