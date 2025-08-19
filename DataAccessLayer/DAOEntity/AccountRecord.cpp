@@ -14,19 +14,18 @@ AccountRecord::AccountRecord(const string& id, const string& name, const string&
             _cardCvv(""),
             _cardAvailableFunds("") {}
 
-AccountRecord::AccountRecord(const string& id, const string& name, const string& phone, const string& balance, const string& type,
+AccountRecord::AccountRecord(const string& id, const string& name, const string& phone, const string& type,
                                                          const string& cardNumber, const string& cardHolderName, const string& cardExpirationDate,
                                                          const string& cardCvv)
         : _id(id),
             _name(name),
             _phoneNumber(phone),
-            _balance(balance),
             _type(type),
             _cardNumber(cardNumber),
             _cardHolderName(name), 
             _cardExpirationDate(cardExpirationDate),
             _cardCvv(cardCvv),
-            _cardAvailableFunds(balance) {}
+            _cardAvailableFunds(_balance) {}
 string AccountRecord::getCardHolderName() const {
     return _cardHolderName;
 }

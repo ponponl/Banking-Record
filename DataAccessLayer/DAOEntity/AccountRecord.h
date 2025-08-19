@@ -20,7 +20,7 @@ class AccountRecord {
     public:
         AccountRecord();
         AccountRecord(const string& id, const string& name, const string& phone, const string& balance, const string& type);
-        AccountRecord(const string& id, const string& name, const string& phone, const string& balance, const string& type,
+        AccountRecord(const string& id, const string& name, const string& phone, const string& type,
                 const string& cardNumber, const string& cardHolderName, const string& cardExpirationDate,
                 const string& cardCvv);
     public:
