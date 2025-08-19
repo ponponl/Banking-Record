@@ -19,7 +19,7 @@ vector<AccountRecord> AccountRepository::getAll() const {
 std::optional<AccountRecord> AccountRepository::findById(const string& id) const {
     auto accounts = getAll();
     for (const auto& acc : accounts) {
-        if (acc.getId() == id) {
+        if (acc.getID() == id) {
             return acc;
         }
     }
@@ -62,7 +62,7 @@ void AccountRepository::removeAccount(const string& id) {
     bool hasAccount = false;
 
     for (const auto& acc : accounts) {
-        if (acc.getId() != id) {
+        if (acc.getID() != id) {
             hasAccount = true;
             lines.push_back(AccountParser::serializeAccount(acc));
         }
@@ -78,7 +78,7 @@ bool AccountRepository::updateAccount(const AccountRecord& account) {
     bool hasAccount = false;
 
     for (auto& acc : accounts) {
-        if (acc.getId() == account.getId()) {
+        if (acc.getID() == account.getID()) {
             acc = account;
             hasAccount = true;
         }
