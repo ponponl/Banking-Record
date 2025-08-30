@@ -20,8 +20,7 @@ class AccountRepository : public IAccountRepository {
     public:
         vector<AccountRecord> getAll() const override; 
         optional<AccountRecord> findById(const string& id) const override;
-        vector<AccountRecord> findByName(const string& name) const override;
-        optional<AccountRecord> findByPhone(const string& phoneNumber) const override;
+        vector<AccountRecord> findByUserId(const string& userId) const;
 };
 
 #endif

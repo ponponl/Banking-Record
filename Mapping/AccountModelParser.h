@@ -18,26 +18,23 @@ public:
         if (model.getType() == AccountType::card) {
             CardAccount cardAcc(
                 id,
+                model.getUserId(),
                 model.getCardNumber(),
-                model.getHolderName(),
                 model.getExpirationDate(),
                 model.getCvv(),
                 model.getAvailableFunds()
             );
-            cardAcc.setPhoneNumber(model.getPhoneNumber());
             return std::make_unique<CardAccountAdapter>(cardAcc);
         } else if (model.getType() == AccountType::vip || (model.getType() == AccountType::regular && model.getBalance() > 2000)) {
             return std::make_unique<VipAccount>(
                 id,
-                model.getName(),
-                model.getPhoneNumber(),
+                model.getUserId(),
                 model.getBalance()
             );
         } else {
             return std::make_unique<RegularAccount>(
                 id,
-                model.getName(),
-                model.getPhoneNumber(),
+                model.getUserId(),
                 model.getBalance()
             );
         }
@@ -48,12 +45,9 @@ public:
             const CardAccount& cardAcc = cardAdapter->getCardAccount();
             return AccountModel(
                 cardAcc.getID(),
-                cardAcc.getHolderName(),
-                cardAcc.getPhoneNumber(),
-                static_cast<long long>(cardAcc.getAvailableFunds()),
+                cardAcc.getUserId(),
                 AccountType::card,
                 cardAcc.getCardNumber(),
-                cardAcc.getHolderName(),
                 cardAcc.getExpirationDate(),
                 cardAcc.getCvv(),
                 cardAcc.getAvailableFunds()
@@ -67,8 +61,7 @@ public:
         }
         return AccountModel(
             entity.getID(),
-            entity.getName(),
-            entity.getPhoneNumber(),
+            entity.getUserId(),
             entity.getBalance(),
             type
         );

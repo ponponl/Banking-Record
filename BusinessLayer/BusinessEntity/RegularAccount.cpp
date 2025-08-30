@@ -1,9 +1,9 @@
 #include "RegularAccount.h"
 #include <iostream>
 
-RegularAccount::RegularAccount(int id, const string& name, const string& phone, long long bal)
-    : Account(id, name, phone, bal) {}
+RegularAccount::RegularAccount(int id, int userId, long long bal)
+    : Account(id, userId, bal) {}
 
 long long RegularAccount::getLimit() const {
-    return 100;
+    return 1000;
 }

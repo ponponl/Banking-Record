@@ -1,10 +1,10 @@
 #define ACCOUNT_PARSER
 #ifdef ACCOUNT_PARSER
-#include "../../DataAccessLayer/DAOEntity/AccountRecord.h"
+#include "../../DAOEntity/AccountRecord.h"
 #include <string>
 #include <sstream>
 #include <vector>
-using std::string, std::stringstream, std::vector, std::stoi;
+using std::string, std::stringstream, std::vector, std::stoi, std::getline;
 class AccountParser {
     public:
         static AccountRecord parseAccount(const string& line);

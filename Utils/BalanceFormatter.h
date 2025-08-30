@@ -1,9 +1,13 @@
-#pragma once
-#include <string>
+#ifndef BALANCE_FORMATTER_H
+#define BALANCE_FORMATTER_H
 
+#include <string>
+using std::string;
 class BalanceFormatter {
 public:
-    static std::string formatCurrency(double value, int precision = 2);
+    static string formatCurrency(double value, int precision = 2);
 
-    static double parseFormattedNumber(const std::string& str);
+    static double parseFormattedNumber(const string& str);
 };
+
+#endif

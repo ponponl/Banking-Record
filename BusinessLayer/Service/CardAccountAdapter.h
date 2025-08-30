@@ -12,8 +12,7 @@ class CardAccountAdapter : public Account {
         const CardAccount& getCardAccount() const;
     public:
         int getID() const override;
-        string getName() const override;
-        string getPhoneNumber() const override;
+        int getUserId() const override;
         long long getBalance() const override;
         long long getLimit() const override;
 };

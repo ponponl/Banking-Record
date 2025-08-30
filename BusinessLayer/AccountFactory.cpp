@@ -3,32 +3,32 @@
 
 unique_ptr<Account> AccountFactory::createFrom(const AccountRecord& rec) {
     const int id = stoi(rec.getID());
-    long long bal = 0;
-    try {
-        bal = stoll(rec.getBalance());
-    } catch (const invalid_argument& e) {
-        throw runtime_error("Invalid balance value: " + rec.getBalance());
-    } catch (const out_of_range& e) {
-        throw runtime_error("Balance value out of range: " + rec.getBalance());
-    }
+    const int userId = stoi(rec.getUserId());
     const string type = rec.getType();
 
-    if (type == "vip") {
-        return make_unique<VipAccount>(id, rec.getName(), rec.getPhoneNumber(), bal);
-    }
-    if (type == "regular") {
-        return make_unique<RegularAccount>(id, rec.getName(), rec.getPhoneNumber(), bal);
+    if (type == "vip" || type == "regular") {
+        long long bal = 0;
+        try {
+            bal = stoll(rec.getBalance());
+        } catch (const invalid_argument& e) {
+            throw runtime_error("Invalid balance value: " + rec.getBalance());
+        } catch (const out_of_range& e) {
+            throw runtime_error("Balance value out of range: " + rec.getBalance());
+        }
+        if (type == "vip") {
+            return make_unique<VipAccount>(id, userId, bal);
+        }
+        return make_unique<RegularAccount>(id, userId, bal);
     }
     if (type == "card") {
         CardAccount cardAcc(
             id,
+            userId,
             rec.getCardNumber(),
-            rec.getName(),
             rec.getCardExpirationDate(),
             rec.getCardCvv(),
-            stod(rec.getCardAvailableFunds())
+            stoll(rec.getCardAvailableFunds())
         );
-        cardAcc.setPhoneNumber(rec.getPhoneNumber());
         return make_unique<CardAccountAdapter>(cardAcc);
     }
     throw runtime_error("Unknown account type: " + rec.getType());
@@ -46,8 +46,7 @@ AccountRecord AccountFactory::toRecord(const Account& acc) {
         const CardAccount& cardAcc = cardAdapter->getCardAccount();
         return AccountRecord(
             to_string(cardAcc.getID()),
-            cardAcc.getHolderName(),
-            cardAcc.getPhoneNumber(),
+            to_string(cardAcc.getUserId()),
             "card",
             cardAcc.getCardNumber(),
             cardAcc.getExpirationDate(),
@@ -57,8 +56,7 @@ AccountRecord AccountFactory::toRecord(const Account& acc) {
     }
     return AccountRecord(
         to_string(acc.getID()),
-        acc.getName(),
-        acc.getPhoneNumber(),
+        to_string(acc.getUserId()),
         to_string(acc.getBalance()),
         deduceType(acc)
     );
