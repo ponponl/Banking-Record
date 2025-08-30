@@ -5,6 +5,7 @@
 #include <string>
 #include <algorithm>
 #include <stdexcept>
+#include <vector>
 #include <cstdlib>
 #include "./Service/CardAccountAdapter.h"
 #include "./BusinessEntity/Account.h"

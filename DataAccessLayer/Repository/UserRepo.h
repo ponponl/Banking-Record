@@ -1,5 +1,5 @@
-#ifndef I_USER_REPO_H
-#define I_USER_REPO_H
+#ifndef USERREPO_H
+#define USERREPO_H
 
 #include "IUserRepo.h"
 #include "../File/FileHandle/FileReader.h"
