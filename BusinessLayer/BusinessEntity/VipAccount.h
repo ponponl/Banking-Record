@@ -5,7 +5,7 @@
 
 class VipAccount : public Account {
     public:
-        VipAccount(int id, const string& name, const string& phone, long long bal);
+        VipAccount(int id, int userId, long long bal);
     public:
         long long getLimit() const override;
 };

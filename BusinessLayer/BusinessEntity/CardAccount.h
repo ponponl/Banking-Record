@@ -7,28 +7,27 @@ using std::string;
 class CardAccount {
     private:
         int _id;
+        int _userId;
         string _cardNumber;
-        string _holderName;
         string _expirationDate;
-        string _phoneNumber;
         string _cvv;
-        double _availableFunds;
+        long long _availableFunds;
     public:
-        CardAccount(int id, const string& cardNum, const string& holder, const string& expDate, const string& cvvCode, double funds);
+        CardAccount(int id, int userId, const string& cardNum, const string& expDate, const string& cvvCode, long long funds);
+    public:
         int getID() const;
+        int getUserId() const;
         string getCardNumber() const;
-        string getHolderName() const;
         string getExpirationDate() const;
         string getCvv() const;
-        double getAvailableFunds() const;
-        string getPhoneNumber() const;
+        long long getAvailableFunds() const;
+    public:
         void setID(int id);
+        void setUserId(int userId);
         void setCardNumber(const string& cardNum);
-        void setHolderName(const string& holder);
         void setExpirationDate(const string& expDate);
         void setCvv(const string& cvvCode);
-        void setAvailableFunds(double funds);
-        void setPhoneNumber(const string& phone);
+        void setAvailableFunds(long long funds);
 };
 
 #endif

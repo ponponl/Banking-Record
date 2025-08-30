@@ -5,7 +5,7 @@
 
 class RegularAccount : public Account {
     public:
-        RegularAccount(int id, const string& name, const string& phone, long long bal);
+        RegularAccount(int id, int userId, long long bal);
     public:
         long long getLimit() const override;
 };
