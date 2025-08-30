@@ -13,48 +13,42 @@ enum class AccountType {
 
 class AccountModel {
     private:
-        int _id;  
-        string _name;
-        string _phoneNumber;
+        int _id;
+        int _userId;
         AccountType _type;
         long long _balance;
         //Card account fields
         string _cardNumber;
-        string _holderName;
         string _expirationDate;
         string _cvv;
-        double _availableFunds;
+        long long _availableFunds;
     public:
         AccountModel();
-        AccountModel(int id, const string& name, const string& phone, long long balance, AccountType type);
-        AccountModel(int id, const string& name, const string& phone, long long balance, AccountType type,
-                     const string& cardNumber, const string& holderName, const string& expirationDate,
-                     const string& cvv, double availableFunds);
+        AccountModel(int id, int userId, long long balance, AccountType type);
+        AccountModel(int id, int userId, AccountType type,
+                     const string& cardNumber, const string& expirationDate,
+                     const string& cvv, long long availableFunds);
     public:
         int getID() const;
-        string getName() const;
-        string getPhoneNumber() const;
+        int getUserId() const;
         AccountType getType() const;
         long long getBalance() const;
     public:
         // Card account fields
         string getCardNumber() const;
-        string getHolderName() const;
         string getExpirationDate() const;
         string getCvv() const;
-        double getAvailableFunds() const;
+        long long getAvailableFunds() const;
     public:
-        void setName(const string& name);
-        void setPhoneNumber(const string& phone);
+        void setUserId(int userId);
         void setBalance(long long balance);
         void setType(AccountType type);
     public:
         // Card account fields
         void setCardNumber(const string& cardNumber);
-        void setHolderName(const string& holderName);
         void setExpirationDate(const string& expirationDate);
         void setCvv(const string& cvv);
-        void setAvailableFunds(double availableFunds);
+        void setAvailableFunds(long long availableFunds);
 };
 
 #endif 
