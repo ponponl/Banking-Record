@@ -1,51 +1,26 @@
-1,john doe,0981000001,1010,regular
-2,jane smith,0981000002,1020,regular
-3,alice johnson,0981000003,5020,vip
-4,bob brown,0981000004,1040,regular
-5,charlie davis,0981000005,1050,regular
-6,emily wilson,0981000006,3500,vip
-7,frank miller,0981000007,1070,regular
-8,grace lee,0981000008,1080,regular
-9,henry clark,0981000009,2700,vip
-10,isla lewis,0981000010,1100,regular
-11,jack hall,0981000011,1110,regular
-12,kara allen,0981000012,1120,regular
-13,liam young,0981000013,1130,regular
-14,mia hernandez,0981000014,1140,regular
-15,noah king,0981000015,4500,vip
-16,olivia wright,0981000016,1160,regular
-17,paul scott,0981000017,1170,regular
-18,quinn green,0981000018,1180,regular
-19,ruby adams,0981000019,1190,regular
-20,sam nelson,0981000020,1200,regular
-21,tina carter,0981000021,1210,regular
-22,umar mitchell,0981000022,3200,vip
-23,vera perez,0981000023,1230,regular
-24,will roberts,0981000024,1240,regular
-25,xena turner,0981000025,1250,regular
-26,yara phillips,0981000026,1260,regular
-27,zane campbell,0981000027,1270,regular
-28,amy simmons,0981000028,1280,regular
-29,brian foster,0981000029,1290,regular
-30,clara hayes,0981000030,5100,vip
-31,dylan jenkins,0981000031,1310,regular
-32,ella ross,0981000032,1320,regular
-33,felix kelly,0981000033,1330,regular
-34,georgia ward,0981000034,1340,regular
-35,harry cox,0981000035,1350,regular
-36,ivy richardson,0981000036,1360,regular
-37,jake wood,0981000037,2500,vip
-38,katie watson,0981000038,1380,regular
-39,leo brooks,0981000039,1390,regular
-40,megan gray,0981000040,1400,regular
-41,nathan price,0981000041,1410,regular
-42,orla bennett,0981000042,1420,regular
-43,peter sanders,0981000043,1430,regular
-44,queen bailey,0981000044,1440,regular
-45,ryan barnes,0981000045,1450,regular
-46,sophie stevens,0981000046,4000,vip
-47,tommy hudson,0981000047,1470,regular
-48,uma doyle,0981000048,1480,regular
-49,victor west,0981000049,1490,regular
-50,wendy stone,0981000050,2800,vip
-51,hoianh,09090909,9000,vip
+1,1,vip,9000
+2,2,vip,8800
+3,3,regular,1200
+4,4,regular,1800
+5,5,vip,7600
+6,6,regular,1400
+7,7,regular,1700
+8,8,vip,8900
+9,9,regular,1600
+10,10,vip,6800
+11,11,regular,1100
+12,12,regular,1300
+13,13,vip,8200
+14,14,regular,1900
+15,15,vip,9000
+16,16,regular,1500
+17,17,regular,1700
+18,18,vip,6600
+19,19,regular,1800
+20,20,vip,8700
+21,21,regular,1400
+22,5,card,1234567812345678,12/27,123,4000
+23,8,card,8765432187654321,05/26,456,6000
+24,10,card,1111222233334444,11/28,789,3000
+25,15,card,4444333322221111,08/25,321,5000
+26,20,card,5555666677778888,03/29,654,7000
