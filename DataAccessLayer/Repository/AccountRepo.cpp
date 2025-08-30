@@ -5,8 +5,8 @@ AccountRepository::AccountRepository(const string& filePath)
 
 vector<AccountRecord> AccountRepository::getAll() const {
     FileReader reader(_filePath);
-    std::vector<std::string> lines = reader.getAllLines();
-    std::vector<AccountRecord> result;
+    vector<string> lines = reader.getAllLines();
+    vector<AccountRecord> result;
 
     for (const auto& line : lines) {
         if (line.empty()) continue;
@@ -16,37 +16,14 @@ vector<AccountRecord> AccountRepository::getAll() const {
     return result;
 }
 
-std::optional<AccountRecord> AccountRepository::findById(const string& id) const {
+optional<AccountRecord> AccountRepository::findById(const string& id) const {
     auto accounts = getAll();
     for (const auto& acc : accounts) {
         if (acc.getID() == id) {
             return acc;
         }
     }
-    return std::nullopt;
-}
-
-std::vector<AccountRecord> AccountRepository::findByName(const std::string& name) const {
-    std::vector<AccountRecord> result;
-    auto all = getAll();
-
-    for (const auto& acc : all) {
-        if (acc.getName().find(name) != std::string::npos) {
-            result.push_back(acc);
-        }
-    }
-
-    return result;
-}
-
-std::optional<AccountRecord> AccountRepository::findByPhone(const std::string& phoneNumber) const {
-    auto all = getAll();
-    for (const auto& acc : all) {
-        if (acc.getPhoneNumber() == phoneNumber) {
-            return acc;
-        }
-    }
-    return std::nullopt;
+    return nullopt;
 }
 
 bool AccountRepository::addAccount(const AccountRecord& account) {
@@ -57,8 +34,8 @@ bool AccountRepository::addAccount(const AccountRecord& account) {
 }
 
 void AccountRepository::removeAccount(const string& id) {
-    std::vector<AccountRecord> accounts = getAll();
-    std::vector<std::string> lines;
+    vector<AccountRecord> accounts = getAll();
+    vector<string> lines;
     bool hasAccount = false;
 
     for (const auto& acc : accounts) {
@@ -73,8 +50,8 @@ void AccountRepository::removeAccount(const string& id) {
 }
 
 bool AccountRepository::updateAccount(const AccountRecord& account) {
-    std::vector<AccountRecord> accounts = getAll();
-    std::vector<std::string> lines;
+    vector<AccountRecord> accounts = getAll();
+    vector<string> lines;
     bool hasAccount = false;
 
     for (auto& acc : accounts) {
@@ -91,3 +68,13 @@ bool AccountRepository::updateAccount(const AccountRecord& account) {
     return hasAccount;
 }
 
+vector<AccountRecord> AccountRepository::findByUserId(const string& userId) const {
+    vector<AccountRecord> result;
+    auto all = getAll();
+    for (const auto& acc : all) {
+        if (acc.getUserId() == userId) {
+            result.push_back(acc);
+        }
+    }
+    return result;
+}

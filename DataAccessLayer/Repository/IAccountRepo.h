@@ -16,8 +16,7 @@ public:
 public:
     virtual vector<AccountRecord> getAll() const = 0;
     virtual optional<AccountRecord> findById(const string& id) const = 0;
-    virtual vector<AccountRecord> findByName(const string& name) const = 0;
-    virtual optional<AccountRecord> findByPhone(const string& phoneNumber) const = 0;
+    virtual vector<AccountRecord> findByUserId(const string& userId) const = 0;
 };
 
-#endif // _I_ACCOUNT_REPOSITORY_
+#endif 

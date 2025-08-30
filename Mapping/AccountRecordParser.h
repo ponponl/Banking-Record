@@ -1,8 +1,8 @@
 #define ACCOUNT_RECORD_PARSER
 #ifdef ACCOUNT_RECORD_PARSER
 
-#include "../../BusinessLayer/BusinessEntity/Account.h"
-#include "../../DataAccessLayer/DAOEntity/AccountRecord.h"
+#include "../BusinessLayer/BusinessEntity/Account.h"
+#include "../DataAccessLayer/DAOEntity/AccountRecord.h"
 #include "../BusinessLayer/AccountFactory.h"
 #include <string>
 #include <sstream>
