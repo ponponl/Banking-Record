@@ -1,5 +1,6 @@
-#define ACCOUNT_PARSER
-#ifdef ACCOUNT_PARSER
+#pragma once
+#define ACCOUNT_PARSER_H
+#ifdef ACCOUNT_PARSER_H
 #include "../../DAOEntity/AccountRecord.h"
 #include <string>
 #include <sstream>

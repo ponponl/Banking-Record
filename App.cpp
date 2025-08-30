@@ -1,15 +1,18 @@
 #include "App.h"
 #include "PresentationLayer/Controller/AccountController.h"
-#include "PresentationLayer/Validation/AccountInputValidation.h"
+#include "PresentationLayer/Validation/InputValidation.h"
 
 int App::run() {
     MenuView menu;
     InputView input;
     AccountView accView;
-    auto repo = make_shared<AccountRepository>("DataAccessLayer/File/Data/data.txt");
-    AccountService service(repo);
-    AccountInputValidation::setAccountService(&service); 
-    AccountController controller(menu, input, accView, service);
+    auto accountRepo = make_shared<AccountRepository>("DataAccessLayer/File/Data/data.txt");
+    auto userRepo = make_shared<UserRepo>("DataAccessLayer/File/Data/person.txt");
+    AccountService accountService(accountRepo, userRepo);
+    UserService userService(userRepo);
+    InputValidation::setAccountService(&accountService);
+    InputValidation::setUserService(&userService);
+    AccountController controller(menu, input, accView, accountService);
 
     while (true) {
         int choice = input.getUserChoice(menu);
